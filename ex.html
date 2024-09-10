@@ -36,21 +36,21 @@
         let toptop = 75;
 
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'a') {
+            if (event.key == 'a') {
                 left -= 3;
             } 
-            if (event.key === 'd') {
+            if (event.key == 'd') {
                 left += 3;
             } 
-            if (event.key === 'w') {
+            if (event.key == 'w') {
                 toptop -= 3;
             } 
-            if (event.key === 's') {
+            if (event.key == 's') {
                 toptop += 3;
             }
 
-            character.style.left = ${left}px;
-            character.style.top = ${toptop}px;
+            character.style.left = `${left}px`;
+            character.style.top = `${toptop}px`;
         });
     </script>
 </body>

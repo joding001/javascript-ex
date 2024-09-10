@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body { margin: 0; padding: 0; }
+
+        .gameCanvas {
+            width: 300px;
+            height: 150px;
+            border: 1px solid black;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .character {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 150px;
+            top: 75px;
+            transform: translate(-50%, -50%);
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div class="gameCanvas">
+        <div class="character"></div>
+    </div>
+    <script>
+        const character = document.querySelector(".character");
+        let left = 150;
+        let toptop = 75;
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'a') {
+                left -= 3;
+            } 
+            if (event.key === 'd') {
+                left += 3;
+            } 
+            if (event.key === 'w') {
+                toptop -= 3;
+            } 
+            if (event.key === 's') {
+                toptop += 3;
+            }
+
+            character.style.left = ${left}px;
+            character.style.top = ${toptop}px;
+        });
+    </script>
+</body>
+</html>

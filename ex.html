@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
         html, body { margin: 0; padding: 0; }
 
+        .center {
+            position: absolute;
+            width: auto;
+            height: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         .gameCanvas {
-            width: 300px;
-            height: 150px;
+            width: 600px;
+            height: 300px;
             border: 1px solid black;
-            overflow: hidden;
             position: relative;
         }
 
@@ -19,39 +27,54 @@
             width: 50px;
             height: 50px;
             position: absolute;
-            left: 150px;
-            top: 75px;
+            left: 300px;
+            top: 150px;
             transform: translate(-50%, -50%);
+            z-index: -1;
             background-color: aqua;
         }
     </style>
 </head>
 <body>
-    <div class="gameCanvas">
-        <div class="character"></div>
+    <div class="center">
+        <div class="gameCanvas">
+            <div class="character"></div>
+        </div>
+        <h1 class="h">움직이지 않았습니다.</h1>
     </div>
     <script>
         const character = document.querySelector(".character");
-        let left = 150;
-        let toptop = 75;
+        const hTag = document.querySelector(".h");
+        let left = 300;
+        let toptop = 150;
 
         document.addEventListener('keydown', function(event) {
             if (event.key == 'a') {
-                left -= 3;
+                left -= 5;
             } 
             if (event.key == 'd') {
-                left += 3;
+                left += 5;
             } 
             if (event.key == 'w') {
-                toptop -= 3;
+                toptop -= 5;
             } 
             if (event.key == 's') {
-                toptop += 3;
+                toptop += 5;
             }
-
+            if (left >= 575 || left <= 25 || toptop >= 275 || toptop <= 25) {
+                hTag.innerHTML = "벽에 닿았습니다!";
+            } else {
+                hTag.innerHTML = "벽에 닿지 않았습니다.";
+            }
+            if (left >= 625 || left <= -25 || toptop >= 325 || toptop <= -25) {
+                hTag.innerHTML = "벽 밖으로 나갔습니다!";
+            }
+            
             character.style.left = `${left}px`;
             character.style.top = `${toptop}px`;
         });
+
+        
     </script>
 </body>
 </html>

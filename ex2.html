@@ -4,21 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .title {
+
+        }
+        </style>
 </head>
 <body>
-    <h2>1/5 확률 시뮬레이션</h3>
-    <h2>
-        <span style="color: #ff3c00;">확률: </span>
-        <span id="one">1</span>
-    </h2>
-    <h2>
-        <span style="color: #ff3c00;">확률 기댓값: </span>
-        0.2
-    </h2>
-    <h2>
-        <span style="color: #ff3c00;">성공횟수: </span>
-        <span id="two">0 / 0</span>
-    </h2>
+    <div>
+        <h2 class="title">1/5 확률 시뮬레이션</h2>
+        <h2>
+            <span style="color: #ff3c00;">확률: </span>
+            <span id="one">1</span>
+        </h2>
+        <h2>
+            <span style="color: #ff3c00;">오차: </span>
+            <span id="two">0.8</span>
+        </h2>
+        <h2>
+            <span style="color: #ff3c00;">확률 기댓값: </span>
+            0.2
+        </h2>
+        <h2>
+            <span style="color: #ff3c00;">성공횟수: </span>
+            <span id="three">0 / 0</span>
+        </h2>
+        <h2 id="four"></h2>
+    </div>
+    
     
     <script>
         var success = 0;
@@ -26,14 +39,27 @@
 
         setInterval(function(){
             executionNumber++;
-            if (Math.random() * 5 + 1 < 2) {
+
+            if (Math.random() < 0.2) {
                 success++;
             }
-            document.querySelector("#one").innerHTML = success / executionNumber;
-            document.querySelector("#two").innerHTML = `${success} / ${executionNumber}`;
-        }, 1);
+            
+            var currentProbability = success / executionNumber;
+            var expectedValue = 0.2;
+            var error = Math.abs(currentProbability - expectedValue);
 
-        
+            document.querySelector("#one").innerHTML = currentProbability.toFixed(4);
+            document.querySelector("#two").innerHTML = error.toFixed(4);
+
+            document.querySelector("#three").innerHTML = `${success} / ${executionNumber}`;
+            
+            if (error <= 0.00001) {
+                document.querySelector("#four").innerHTML = "정확!";
+            } else {
+                document.querySelector("#four").innerHTML = "";
+            }
+
+        }, 1000);
     </script>
 </body>
 </html>

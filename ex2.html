@@ -4,57 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        .all-wrapper {
+            width: 90px;
+            height: auto;
+            margin: 0 auto;
+        }
+        h5, p { text-align: center; font-size: 10px; }
+        #wrapper {
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            width: 90px;
+        }
+        button { width: 30px; height: 30px; }
+        button#submit { width: 60px; }
+    </style>
 </head>
 <body>
-    <div>
-        <h2 class="title">1/5 확률 시뮬레이션</h2>
-        <h2>
-            <span style="color: #ff3c00;">확률: </span>
-            <span id="one">1</span>
-        </h2>
-        <h2>
-            <span style="color: #ff3c00;">오차: </span>
-            <span id="two">0.8</span>
-        </h2>
-        <h2>
-            <span style="color: #ff3c00;">확률 기댓값: </span>
-            0.2
-        </h2>
-        <h2>
-            <span style="color: #ff3c00;">성공횟수: </span>
-            <span id="three">0 / 0</span>
-        </h2>
-        <h2 id="four"></h2>
+    <div class="all-wrapper">
+        <h5>비밀번호를 입력하시오.</h5>
+        <div id="wrapper"></div>
+        <p id="message"></p>
     </div>
-    
-    
     <script>
-        var success = 0;
-        var executionNumber = 0;
+        let password = "";
 
-        setInterval(function(){
-            executionNumber++;
+        for (var i = 1; i <= 10; i++) {
+            var buttonId = (i === 10) ? 0 : i;
+            document.querySelector("#wrapper").innerHTML += "<button id='" + buttonId + "' onclick='addToPassword(" + buttonId + ")'>" + buttonId + "</button>";
+        }
 
-            if (Math.random() < 0.2) {
-                success++;
-            }
-            
-            var currentProbability = success / executionNumber;
-            var expectedValue = 0.2;
-            var error = Math.abs(currentProbability - expectedValue);
+        document.querySelector("#wrapper").innerHTML += "<button id='submit' onclick='checkPassword()'>확인</button>";
 
-            document.querySelector("#one").innerHTML = currentProbability.toFixed(4);
-            document.querySelector("#two").innerHTML = error.toFixed(4);
+        function addToPassword(num) {
+            password += num;
+        }
 
-            document.querySelector("#three").innerHTML = `${success} / ${executionNumber}`;
-            
-            if (error <= 0.00001) {
-                document.querySelector("#four").innerHTML = "정확!";
+        function checkPassword() {
+            if (password == "1234") {
+                document.getElementById("message").innerText = "로그인 성공했습니다."
             } else {
-                document.querySelector("#four").innerHTML = "";
+                document.getElementById("message").innerText = "비밀번호가 올바르지 않습니다."
             }
-
-        }, 1000);
+            password = "";
+        }
     </script>
 </body>
 </html>

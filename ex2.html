@@ -27,6 +27,8 @@
     <div class="all-wrapper">
         <h5>비밀번호를 입력하시오.</h5>
         <div id="wrapper"></div>
+        <p id="write-password">입력한 비밀번호: </p>
+        <br />
         <p id="message"></p>
     </div>
     <script>
@@ -39,8 +41,10 @@
 
         document.querySelector("#wrapper").innerHTML += "<button id='submit' onclick='checkPassword()'>확인</button>";
 
+        
         function addPassword(num) {
             password += num;
+            document.querySelector("#write-password").innerText = "입력한 비밀번호: " + password;
         }
 
         function checkPassword() {
@@ -50,6 +54,7 @@
                 document.getElementById("message").innerText = "비밀번호가 올바르지 않습니다.";
             }
             password = "";
+            document.querySelector("#write-password").innerText = "입력한 비밀번호: " + password;
         }
     </script>
 </body>
